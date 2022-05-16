@@ -197,18 +197,18 @@ function clearfile() {
     Write-Host -NoNewLine "`n请务必等待docker服务运行后再继续!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`n`n"
     $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
     
-    if (!(Test-Path ".\$wsl.zip")) {
+    if (!(Test-Path "./$wsl.zip")) {
         Write-Output "`n下载 CENTOS FOR WSL 7.0 ..."
         $downfile = "--no-check-certificate $centosFile -O $wsl.zip"
         downloadFile($downfile);
     }
-    if ((Test-Path ".\$wsl.zip") -and !(Test-Path ".\$wsl.exe")) {
+    if ((Test-Path "./$wsl.zip") -and !(Test-Path "./$wsl.exe")) {
         Write-Output "`n解压缩 ..."
         Expand-Archive -Force "$wsl.zip" "$runPath"
         Rename-Item "$centosExe" "$wsl.exe"
         Write-Output "`n开始安装centos到WSL中 ...`n==========================================="
-       # "`n" | & ".\$wsl"
-        Start-Process ".\$wsl" -wait -NoNewWindow -PassThru
+       # "`n" | & "./$wsl"
+        Start-Process "./$wsl" -wait -NoNewWindow -PassThru
         Write-Output "`n`n设置默认WSL镜像为 [$wsl] ...`n"
         wsl -s $wsl
         Write-Output "`n`n开始创建docker基础文件环境 ...`n"
@@ -221,7 +221,7 @@ function clearfile() {
 
     Write-Output "`n`n清除残余文件 ...`n"
     Remove-Item -Path ".\wsl_update_x64.msi" -Force
-    #Remove-Item -Path ".\$wsl.zip" -Force
+    #Remove-Item -Path "./$wsl.zip" -Force
     Remove-Item -Path ".\inst-wsl-docker-bota.ps1" -Force
     #Remove-Item -Path ".\install.sh" -Force
 
