@@ -161,9 +161,6 @@ function step2() {
         #"`n" | & ".\DockerDesktopInstaller.exe"
         Start-Process ".\DockerDesktopInstaller.exe" -wait -NoNewWindow -PassThru
     }
-
-    
-
     Set-Key $regrun $restartkey "powershell start-process PowerShell -verb runas -argument '$PSCommandPath clearfile'"
     clearFile
 }
@@ -228,7 +225,7 @@ function clearfile() {
 
     #Remove-Item -Path ".\autorunwsl.zip" -Force
     Write-Host -NoNewLine "`n安装完成，按任意键结束..."
-    $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    # $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 }
 
 init
