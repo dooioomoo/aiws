@@ -151,7 +151,7 @@ function step2() {
     msiexec /i wsl_update_x64.msi /qn
     Write-Output "升级WSL2完成！"
     Write-Output "`n设置wsl默认版本为2 ..."
-    powershell wsl --set-default-version 2
+    powershell wsl --set-default-version 2 ;
 
     if (!(Test-Path ".\DockerDesktopInstaller.exe")) {
         Write-Output "`n下载 DOCKER DESKTOP ..."
@@ -162,7 +162,7 @@ function step2() {
         Start-Process ".\DockerDesktopInstaller.exe" -wait -NoNewWindow -PassThru
     }
     Set-Key $regrun $restartkey "powershell start-process PowerShell -verb runas -argument '$PSCommandPath clearfile'"
-    clearFile
+    clearFile;
 }
 
 function init() {
@@ -211,7 +211,7 @@ function clearfile() {
         Write-Output "`n`n开始创建docker基础文件环境 ...`n"
         wsl sh -c '[ -d /$wsl ] || mkdir /$wsl ; cd /$wsl ; yum install git -y ; git clone $DOCKERBOTA ./ ; cp .env-example .env ; mv build.bat build.sh ; source instsys.sh'
     }
-
+`
     Write-Output "`n`n安装宝塔系统 ...`n"
 
     wsl sh -c "cd /$wsl ; sh build.sh"
@@ -225,7 +225,6 @@ function clearfile() {
 
     #Remove-Item -Path ".\autorunwsl.zip" -Force
     Write-Host -NoNewLine "`n安装完成，按任意键结束..."
-    # $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 }
 
 init
