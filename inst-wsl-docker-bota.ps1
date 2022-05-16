@@ -212,12 +212,12 @@ function clearfile() {
         Write-Output "`n`n设置默认WSL镜像为 [$wsl] ...`n"
         wsl -s $wsl
         Write-Output "`n`n开始创建docker基础文件环境 ...`n"
-        wsl sh -c "[ -d /$wsl ] || mkdir /$wsl && cd /$wsl && yum install git -y && git clone $DOCKERBOTA ./ && cp .env-example .env && mv build.bat build.sh && source instsys.sh"
+        wsl sh -c "[ -d /$wsl ] || mkdir /$wsl ; cd /$wsl ; yum install git -y ; git clone $DOCKERBOTA ./ ; cp .env-example .env ; mv build.bat build.sh ; source instsys.sh"
     }
 
     Write-Output "`n`n安装宝塔系统 ...`n"
 
-    wsl sh -c "cd /$wsl && sh build.sh"
+    wsl sh -c "cd /$wsl ; sh build.sh"
 
     Write-Output "`n`n清除残余文件 ...`n"
     Remove-Item -Path ".\wsl_update_x64.msi" -Force
